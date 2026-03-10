@@ -18,6 +18,7 @@ declare global {
 }
 
 export default function LanguageToggle({ className = "" }: { className?: string }) {
+  const [isSpanish, setIsSpanish] = useState(false);
   const [, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -52,10 +53,10 @@ export default function LanguageToggle({ className = "" }: { className?: string 
       ".goog-te-combo"
     ) as HTMLSelectElement | null;
     if (select) {
-      // Check current language
-      const isSpanish = select.value === "es";
-      select.value = isSpanish ? "en" : "es";
+      const newLang = isSpanish ? "en" : "es";
+      select.value = newLang;
       select.dispatchEvent(new Event("change"));
+      setIsSpanish(!isSpanish);
     }
   };
 
@@ -64,12 +65,13 @@ export default function LanguageToggle({ className = "" }: { className?: string 
       {/* Hidden Google Translate element */}
       <div id="google_translate_element" className="hidden" />
 
-      {/* Hide Google Translate banner via CSS */}
+      {/* Hide Google Translate banner + fix highlight via CSS */}
       <style jsx global>{`
         .goog-te-banner-frame,
         .skiptranslate,
         #goog-gt-tt,
-        .goog-te-balloon-frame {
+        .goog-te-balloon-frame,
+        .goog-te-menu-frame {
           display: none !important;
         }
         body {
@@ -77,6 +79,31 @@ export default function LanguageToggle({ className = "" }: { className?: string 
         }
         .goog-text-highlight {
           background: none !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+          border: none !important;
+        }
+        font[style],
+        font {
+          background: none !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        span[lang] {
+          background: none !important;
+          background-color: transparent !important;
+          box-shadow: none !important;
+        }
+        .translated-ltr,
+        .translated-rtl {
+          background: none !important;
+          background-color: transparent !important;
+        }
+        /* Kill all Google Translate hover highlights */
+        *:hover > font,
+        *:hover > span[lang] {
+          background: none !important;
+          background-color: transparent !important;
           box-shadow: none !important;
         }
       `}</style>
@@ -84,10 +111,10 @@ export default function LanguageToggle({ className = "" }: { className?: string 
       <button
         onClick={toggleSpanish}
         className={`inline-flex items-center gap-1.5 font-semibold hover:text-gold transition-colors cursor-pointer ${className}`}
-        aria-label="Translate to Spanish"
+        aria-label={isSpanish ? "Switch to English" : "Traducir al Español"}
       >
         <Languages size={16} />
-        <span>Se Habla Español</span>
+        <span>{isSpanish ? "🇺🇸 English" : "🇲🇽 Español"}</span>
       </button>
     </>
   );
