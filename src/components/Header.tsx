@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
+import LanguageToggle from "./LanguageToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -45,7 +46,7 @@ export default function Header() {
         <span className="mx-2">|</span>
         <span>Mon – Thu: 8AM – 3PM</span>
         <span className="mx-2">|</span>
-        <span className="font-medium">Se Habla Español</span>
+        <LanguageToggle className="text-white text-xs sm:text-sm" />
       </div>
 
       {/* Main nav */}
@@ -170,9 +171,9 @@ export default function Header() {
                     Call {PHONE}
                   </a>
                 </div>
-                <p className="mt-auto pb-8 text-xs text-charcoal/50 text-center">
-                  Se Habla Español
-                </p>
+                <div className="mt-auto pb-8 text-center">
+                  <LanguageToggle className="text-sage text-sm" />
+                </div>
               </div>
             </motion.div>
           </motion.div>
