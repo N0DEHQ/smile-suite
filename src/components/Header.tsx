@@ -109,44 +109,48 @@ export default function Header() {
                 <Phone size={20} />
               </a>
               <button
-                onClick={() => setMobileOpen(!mobileOpen)}
+                onClick={() => setMobileOpen(true)}
                 className="flex items-center justify-center w-12 h-12 rounded-full border border-charcoal/20"
-                aria-label="Toggle menu"
+                aria-label="Open menu"
               >
-                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+                <Menu size={22} />
               </button>
             </div>
           </div>
         </div>
       </motion.header>
 
-      {/* Mobile menu overlay */}
+      {/* Mobile menu - ABOVE everything (z-[100]) */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/40 lg:hidden"
-            onClick={() => setMobileOpen(false)}
+            className="fixed inset-0 z-[100] lg:hidden"
           >
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/40" onClick={() => setMobileOpen(false)} />
+            
+            {/* Panel - full screen white */}
             <motion.div
               initial={{ x: "100%" }}
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-full bg-white shadow-2xl z-50"
-              onClick={(e) => e.stopPropagation()}
+              className="absolute inset-0 bg-white"
             >
-              {/* Close button inside panel */}
-              <div className="flex items-center justify-between px-6 pt-6">
-                <Image
-                  src="/images/logo.png"
-                  alt="The Smile Suite"
-                  width={160}
-                  height={50}
-                  className="h-12 w-auto"
-                />
+              {/* Menu header with logo + close */}
+              <div className="flex items-center justify-between px-6 py-5 border-b border-charcoal/10">
+                <Link href="/" onClick={() => setMobileOpen(false)}>
+                  <Image
+                    src="/images/logo.png"
+                    alt="The Smile Suite"
+                    width={200}
+                    height={60}
+                    className="h-16 w-auto"
+                  />
+                </Link>
                 <button
                   onClick={() => setMobileOpen(false)}
                   className="flex items-center justify-center w-12 h-12 rounded-full border border-charcoal/20"
@@ -155,7 +159,9 @@ export default function Header() {
                   <X size={22} />
                 </button>
               </div>
-              <div className="flex flex-col h-full pt-8 px-8">
+
+              {/* Menu content */}
+              <div className="flex flex-col px-8 pt-6">
                 <nav className="flex flex-col gap-1">
                   {navLinks.map((link, i) => (
                     <motion.div
@@ -167,29 +173,29 @@ export default function Header() {
                       <Link
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className="block py-3 text-lg font-medium text-charcoal hover:text-sage transition-colors border-b border-charcoal/5"
+                        className="block py-4 text-xl font-medium text-charcoal hover:text-sage transition-colors border-b border-charcoal/5"
                       >
                         {link.label}
                       </Link>
                     </motion.div>
                   ))}
                 </nav>
-                <div className="mt-8 flex flex-col gap-3">
+                <div className="mt-10 flex flex-col gap-4">
                   <a
                     href={BOOKING_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-primary text-center"
+                    className="btn-primary text-center text-base py-4"
                     onClick={() => setMobileOpen(false)}
                   >
                     Book Now
                   </a>
-                  <a href={PHONE_HREF} className="btn-secondary text-center">
+                  <a href={PHONE_HREF} className="btn-secondary text-center text-base py-4">
                     Call {PHONE}
                   </a>
                 </div>
-                <div className="mt-auto pb-8 text-center">
-                  <LanguageToggle className="text-sage text-sm" />
+                <div className="mt-10 text-center">
+                  <LanguageToggle className="text-sage text-base" />
                 </div>
               </div>
             </motion.div>
