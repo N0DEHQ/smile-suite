@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import { Phone, ArrowRight } from "lucide-react";
 
 const BOOKING_URL = "https://www.smilemidland.com/contact-us/";
@@ -8,8 +9,17 @@ const BOOKING_URL = "https://www.smilemidland.com/contact-us/";
 export default function Hero() {
   return (
     <section className="relative min-h-[90vh] sm:min-h-[85vh] flex items-center overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-hero-gradient" />
+      {/* Background Image */}
+      <Image
+        src="/images/hero-claydesta.jpg"
+        alt="Claydesta Center atrium — home of The Smile Suite in Midland, TX"
+        fill
+        priority
+        className="object-cover"
+        quality={85}
+      />
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/30" />
       
       {/* Decorative circles */}
       <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-white/5 blur-sm" />
