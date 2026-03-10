@@ -36,7 +36,7 @@ export default function Footer() {
               alt="The Smile Suite"
               width={220}
               height={65}
-              className="h-14 w-auto mb-4 brightness-0 invert"
+              className="h-24 w-auto mb-4 brightness-0 invert"
             />
             <p className="text-white/60 text-sm leading-relaxed mb-4">
               Gentle, modern dentistry for every stage of life. Led by Dr. Mallory Gonzales in Midland, TX.
