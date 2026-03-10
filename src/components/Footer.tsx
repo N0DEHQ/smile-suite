@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, MapPin, Clock, Instagram, Facebook } from "lucide-react";
 
 const BOOKING_URL = "https://www.smilemidland.com/contact-us/";
@@ -30,7 +31,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <h3 className="font-playfair text-2xl font-bold mb-4">THE SMILE SUITE</h3>
+            <Image
+              src="/images/logo.png"
+              alt="The Smile Suite"
+              width={220}
+              height={65}
+              className="h-14 w-auto mb-4 brightness-0 invert"
+            />
             <p className="text-white/60 text-sm leading-relaxed mb-4">
               Gentle, modern dentistry for every stage of life. Led by Dr. Mallory Gonzales in Midland, TX.
             </p>

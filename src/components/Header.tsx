@@ -63,9 +63,9 @@ export default function Header() {
               <Image
                 src="/images/logo.png"
                 alt="The Smile Suite — Dr. Mallory Gonzales"
-                width={200}
-                height={60}
-                className="h-10 sm:h-12 w-auto"
+                width={280}
+                height={80}
+                className="h-14 sm:h-16 w-auto"
                 priority
               />
             </Link>
