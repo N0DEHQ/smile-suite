@@ -18,7 +18,7 @@ declare global {
 }
 
 export default function LanguageToggle({ className = "" }: { className?: string }) {
-  const [loaded, setLoaded] = useState(false);
+  const [, setLoaded] = useState(false);
 
   useEffect(() => {
     // Only load once
