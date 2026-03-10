@@ -138,7 +138,7 @@ export default function Header() {
               className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col h-full pt-20 px-8">
+              <div className="flex flex-col h-full pt-32 px-8">
                 <nav className="flex flex-col gap-1">
                   {navLinks.map((link, i) => (
                     <motion.div
