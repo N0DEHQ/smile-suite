@@ -2,26 +2,58 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply text-charcoal;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-sage text-white font-semibold rounded-full 
+           hover:bg-sage-dark transition-all duration-300 hover:shadow-lg hover:shadow-sage/25 
+           active:scale-[0.98] text-sm tracking-wide uppercase;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 border-2 border-sage text-sage font-semibold 
+           rounded-full hover:bg-sage hover:text-white transition-all duration-300 text-sm tracking-wide uppercase;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-gold text-white font-semibold rounded-full 
+           hover:bg-gold-dark transition-all duration-300 hover:shadow-lg hover:shadow-gold/25 
+           active:scale-[0.98] text-sm tracking-wide uppercase;
+  }
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24;
+  }
+  .heading-1 {
+    @apply font-playfair text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight;
+  }
+  .heading-2 {
+    @apply font-playfair text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight;
+  }
+  .heading-3 {
+    @apply font-playfair text-2xl sm:text-3xl font-bold;
+  }
+  .subtitle {
+    @apply text-lg sm:text-xl text-charcoal/70 leading-relaxed;
+  }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f9faf8;
+}
+::-webkit-scrollbar-thumb {
+  background: #a3b8a0;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #7d9b78;
 }
