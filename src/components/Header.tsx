@@ -37,7 +37,7 @@ export default function Header() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-sage text-white text-xs sm:text-sm py-2 px-4 text-center">
+      <div className="bg-sage text-white text-xs sm:text-sm py-2.5 px-4 text-center">
         <span className="hidden sm:inline">6 Desta Drive, Suite 2700, Midland, TX 79705 &nbsp;|&nbsp; </span>
         <a href={PHONE_HREF} className="hover:underline font-medium">
           New Patients: {PHONE}
@@ -71,12 +71,12 @@ export default function Header() {
             </Link>
 
             {/* Desktop nav */}
-            <nav className="hidden lg:flex items-center gap-8">
+            <nav className="hidden lg:flex items-center gap-10">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-charcoal/80 hover:text-sage transition-colors relative group"
+                  className="text-base font-medium text-charcoal/80 hover:text-sage transition-colors relative group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-sage transition-all group-hover:w-full" />
@@ -88,12 +88,12 @@ export default function Header() {
             <div className="hidden lg:flex items-center gap-4">
               <a
                 href={PHONE_HREF}
-                className="flex items-center gap-2 text-sm font-medium text-sage hover:text-sage-dark transition-colors"
+                className="flex items-center gap-2 text-base font-medium text-sage hover:text-sage-dark transition-colors"
               >
-                <Phone size={16} />
+                <Phone size={18} />
                 {PHONE}
               </a>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !py-2.5 !px-6 !text-xs">
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-primary !py-3 !px-8 !text-sm">
                 Book Now
               </a>
             </div>
@@ -102,17 +102,17 @@ export default function Header() {
             <div className="flex items-center gap-3 lg:hidden">
               <a
                 href={PHONE_HREF}
-                className="flex items-center justify-center w-10 h-10 rounded-full bg-sage text-white"
+                className="flex items-center justify-center w-12 h-12 rounded-full bg-sage text-white"
                 aria-label="Call us"
               >
-                <Phone size={18} />
+                <Phone size={20} />
               </a>
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="flex items-center justify-center w-10 h-10 rounded-full border border-charcoal/20"
+                className="flex items-center justify-center w-12 h-12 rounded-full border border-charcoal/20"
                 aria-label="Toggle menu"
               >
-                {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+                {mobileOpen ? <X size={22} /> : <Menu size={22} />}
               </button>
             </div>
           </div>
