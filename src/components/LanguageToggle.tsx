@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useCallback, useSyncExternalStore } from "react";
+import { useEffect, useCallback, useSyncExternalStore } from "react";
 import { Languages } from "lucide-react";
 
 declare global {
