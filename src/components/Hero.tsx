@@ -34,8 +34,8 @@ export default function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6">
-              Now Welcoming New Patients
+            <span className="inline-block px-5 py-2 bg-gold rounded-full text-white text-sm font-bold shadow-lg shadow-gold/30 mb-6">
+              ✦ Now Welcoming New Patients
             </span>
           </motion.div>
 
