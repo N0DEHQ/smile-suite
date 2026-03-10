@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Languages } from "lucide-react";
 
 declare global {
@@ -17,14 +17,32 @@ declare global {
   }
 }
 
+function setCookie(name: string, value: string, days: number) {
+  const d = new Date();
+  d.setTime(d.getTime() + days * 86400000);
+  document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
+}
+
+function getCookie(name: string): string | null {
+  const match = document.cookie.match(new RegExp(`(^| )${name}=([^;]+)`));
+  return match ? match[2] : null;
+}
+
 export default function LanguageToggle({ className = "" }: { className?: string }) {
   const [isSpanish, setIsSpanish] = useState(false);
-  const [, setLoaded] = useState(false);
+  const [ready, setReady] = useState(false);
+
+  // Check current state on mount
+  useEffect(() => {
+    const current = getCookie("googtrans");
+    if (current && current.includes("/es")) {
+      setIsSpanish(true);
+    }
+  }, []);
 
   useEffect(() => {
-    // Only load once
     if (document.getElementById("google-translate-script")) {
-      setLoaded(true);
+      setReady(true);
       return;
     }
 
@@ -37,45 +55,68 @@ export default function LanguageToggle({ className = "" }: { className?: string 
         },
         "google_translate_element"
       );
-      setLoaded(true);
+      setReady(true);
     };
 
     const script = document.createElement("script");
     script.id = "google-translate-script";
-    script.src =
-      "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
     script.async = true;
     document.body.appendChild(script);
   }, []);
 
-  const toggleSpanish = () => {
-    const select = document.querySelector(
-      ".goog-te-combo"
-    ) as HTMLSelectElement | null;
-    if (select) {
-      const newLang = isSpanish ? "en" : "es";
-      select.value = newLang;
-      select.dispatchEvent(new Event("change"));
-      setIsSpanish(!isSpanish);
+  const switchLanguage = useCallback((toLang: "en" | "es") => {
+    if (toLang === "en") {
+      // Clear translation - set cookie back to English and reload
+      setCookie("googtrans", "/en/en", 1);
+      // Also clear the domain-specific cookie
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=/en/en; path=/;";
+      setIsSpanish(false);
+      // Force clean reload to remove all translation artifacts
+      window.location.reload();
+    } else {
+      // Set to Spanish via cookie + trigger select
+      setCookie("googtrans", "/en/es", 1);
+      document.cookie = "googtrans=/en/es; path=/;";
+
+      // Try the select approach first (instant)
+      const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
+      if (select) {
+        select.value = "es";
+        select.dispatchEvent(new Event("change"));
+        setIsSpanish(true);
+      } else {
+        // Fallback: reload with cookie set
+        setIsSpanish(true);
+        window.location.reload();
+      }
     }
+  }, []);
+
+  const handleClick = () => {
+    switchLanguage(isSpanish ? "en" : "es");
   };
 
   return (
     <>
-      {/* Hidden Google Translate element */}
-      <div id="google_translate_element" className="hidden" />
+      <div id="google_translate_element" className="!hidden" />
 
-      {/* Hide Google Translate banner + fix highlight via CSS */}
       <style jsx global>{`
         .goog-te-banner-frame,
         .skiptranslate,
         #goog-gt-tt,
         .goog-te-balloon-frame,
-        .goog-te-menu-frame {
+        .goog-te-menu-frame,
+        .goog-te-menu2 {
           display: none !important;
+          visibility: hidden !important;
+          height: 0 !important;
+          overflow: hidden !important;
         }
         body {
           top: 0 !important;
+          position: static !important;
         }
         .goog-text-highlight {
           background: none !important;
@@ -83,34 +124,36 @@ export default function LanguageToggle({ className = "" }: { className?: string 
           box-shadow: none !important;
           border: none !important;
         }
-        font[style],
-        font {
+        font[style], font,
+        span[lang],
+        .translated-ltr, .translated-rtl {
           background: none !important;
           background-color: transparent !important;
           box-shadow: none !important;
         }
-        span[lang] {
-          background: none !important;
-          background-color: transparent !important;
-          box-shadow: none !important;
-        }
-        .translated-ltr,
-        .translated-rtl {
-          background: none !important;
-          background-color: transparent !important;
-        }
-        /* Kill all Google Translate hover highlights */
         *:hover > font,
         *:hover > span[lang] {
           background: none !important;
           background-color: transparent !important;
           box-shadow: none !important;
         }
+        /* Kill the iframe Google injects at top */
+        body > .skiptranslate {
+          display: none !important;
+          height: 0 !important;
+        }
+        body > .skiptranslate + iframe {
+          display: none !important;
+          height: 0 !important;
+        }
       `}</style>
 
       <button
-        onClick={toggleSpanish}
-        className={`inline-flex items-center gap-1.5 font-semibold hover:text-gold transition-colors cursor-pointer ${className}`}
+        onClick={handleClick}
+        disabled={!ready}
+        className={`inline-flex items-center gap-1.5 font-semibold hover:text-gold transition-all duration-200 cursor-pointer select-none active:scale-95 ${
+          !ready ? "opacity-50 cursor-wait" : ""
+        } ${className}`}
         aria-label={isSpanish ? "Switch to English" : "Traducir al Español"}
       >
         <Languages size={16} />
