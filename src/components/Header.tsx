@@ -58,7 +58,7 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24 sm:h-28">
+          <div className="flex items-center justify-between h-16 sm:h-24 lg:h-28">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
@@ -66,7 +66,7 @@ export default function Header() {
                 alt="The Smile Suite — Dr. Mallory Gonzales"
                 width={280}
                 height={80}
-                className="h-20 sm:h-24 w-auto"
+                className="h-10 sm:h-16 lg:h-24 w-auto"
                 priority
               />
             </Link>
