@@ -173,12 +173,24 @@ export default function AboutPage() {
           </ScrollReveal>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
-            {["Team Member", "Team Member", "Team Member", "Team Member"].map((name, i) => (
+            {[
+              { src: "/images/team-1.jpg", name: "Dental Assistant", desc: "X-Ray & Imaging" },
+              { src: "/images/team-2.jpg", name: "Office Manager", desc: "Front Desk" },
+              { src: "/images/team-3.jpg", name: "Patient Coordinator", desc: "Front Desk" },
+              { src: "/images/team-4.jpg", name: "Dental Assistant", desc: "Invisalign Specialist" },
+            ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="aspect-square rounded-2xl bg-sage-lightest flex items-center justify-center">
-                  <p className="text-sage/40 text-sm font-medium">Photo Coming Soon</p>
+                <div className="aspect-square rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={member.src}
+                    alt={`${member.name} at The Smile Suite`}
+                    fill
+                    className="object-cover object-top"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                  />
                 </div>
-                <p className="font-medium text-charcoal text-center mt-3 text-sm">{name}</p>
+                <p className="font-medium text-charcoal text-center mt-3 text-sm">{member.name}</p>
+                <p className="text-charcoal/50 text-center text-xs">{member.desc}</p>
               </ScrollReveal>
             ))}
           </div>
