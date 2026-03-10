@@ -19,7 +19,7 @@ export default function Hero() {
         quality={85}
       />
       {/* Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/30" />
+      <div className="absolute inset-0 bg-gradient-to-b from-charcoal/70 via-charcoal/65 to-charcoal/85" />
       
       {/* Decorative circles */}
       <div className="absolute top-20 right-10 w-72 h-72 rounded-full bg-white/5 blur-sm" />
@@ -68,16 +68,16 @@ export default function Hero() {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-gold text-white font-semibold rounded-full hover:bg-gold-dark transition-all duration-300 hover:shadow-lg hover:shadow-gold/30 active:scale-[0.98] text-sm tracking-wide uppercase group"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-gold text-white font-bold rounded-full hover:bg-gold-dark transition-all duration-300 shadow-lg shadow-gold/40 active:scale-[0.98] text-base tracking-wide uppercase group"
             >
               Book Your Visit
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+              <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
             </a>
             <a
               href="tel:4326920239"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/15 backdrop-blur-sm text-white font-semibold rounded-full hover:bg-white/25 transition-all duration-300 text-sm tracking-wide uppercase"
+              className="inline-flex items-center justify-center gap-2 px-10 py-4 bg-white text-charcoal font-bold rounded-full hover:bg-white/90 transition-all duration-300 shadow-lg text-base tracking-wide uppercase"
             >
-              <Phone size={16} />
+              <Phone size={18} />
               (432) 692-0239
             </a>
           </motion.div>
@@ -86,7 +86,7 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="mt-8 text-white/60 text-sm"
+            className="mt-8 text-white/80 text-sm font-medium"
           >
             ✦ Claydesta Center &nbsp;|&nbsp; ✦ Serving Midland, Odessa & West Texas &nbsp;|&nbsp; ✦ Se Habla Español
           </motion.p>
