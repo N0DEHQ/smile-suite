@@ -135,10 +135,27 @@ export default function Header() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="absolute right-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl"
+              className="absolute right-0 top-0 h-full w-full bg-white shadow-2xl z-50"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex flex-col h-full pt-32 px-8">
+              {/* Close button inside panel */}
+              <div className="flex items-center justify-between px-6 pt-6">
+                <Image
+                  src="/images/logo.png"
+                  alt="The Smile Suite"
+                  width={160}
+                  height={50}
+                  className="h-12 w-auto"
+                />
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center justify-center w-12 h-12 rounded-full border border-charcoal/20"
+                  aria-label="Close menu"
+                >
+                  <X size={22} />
+                </button>
+              </div>
+              <div className="flex flex-col h-full pt-8 px-8">
                 <nav className="flex flex-col gap-1">
                   {navLinks.map((link, i) => (
                     <motion.div
