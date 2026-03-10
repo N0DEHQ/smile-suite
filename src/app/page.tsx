@@ -6,6 +6,7 @@ import ServiceCard from "@/components/ServiceCard";
 import TechShowcase from "@/components/TechShowcase";
 import TestimonialCarousel from "@/components/TestimonialCarousel";
 import ScrollReveal, { StaggerContainer } from "@/components/ScrollReveal";
+import Image from "next/image";
 import {
   SmilePlus,
   Sparkles,
@@ -96,9 +97,16 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             <ScrollReveal direction="left">
-              <div className="aspect-[4/5] rounded-2xl bg-sage-gradient flex items-end justify-center overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-t from-sage-dark/40 to-transparent" />
-                <div className="relative text-center pb-8 px-4">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/dr-gonzales.jpg"
+                  alt="Dr. Mallory Gonzales, DDS — The Smile Suite, Midland TX"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 text-center pb-8 px-4">
                   <p className="text-white font-playfair text-2xl font-bold">Dr. Mallory Gonzales</p>
                   <p className="text-white/80 text-sm mt-1">DDS — Family & Cosmetic Dentistry</p>
                 </div>

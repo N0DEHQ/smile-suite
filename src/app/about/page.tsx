@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import { GraduationCap, Heart, Award, MapPin, ArrowRight } from "lucide-react";
 
@@ -41,8 +42,15 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <ScrollReveal direction="left">
-              <div className="aspect-[3/4] rounded-2xl bg-sage-gradient relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-t from-sage-dark/50 to-transparent" />
+              <div className="aspect-[3/4] rounded-2xl relative overflow-hidden">
+                <Image
+                  src="/images/dr-gonzales.jpg"
+                  alt="Dr. Mallory Gonzales, DDS — The Smile Suite, Midland TX"
+                  fill
+                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-transparent" />
                 <div className="absolute bottom-8 left-8 right-8">
                   <p className="text-white font-playfair text-3xl font-bold">Dr. Mallory Gonzales</p>
                   <p className="text-white/80 mt-1">DDS — Family & Cosmetic Dentistry</p>
