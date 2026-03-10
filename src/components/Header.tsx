@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Phone, Menu, X } from "lucide-react";
 
@@ -58,10 +59,15 @@ export default function Header() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-playfair text-xl sm:text-2xl font-bold text-charcoal tracking-wide">
-                THE SMILE SUITE
-              </span>
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/logo.png"
+                alt="The Smile Suite — Dr. Mallory Gonzales"
+                width={200}
+                height={60}
+                className="h-10 sm:h-12 w-auto"
+                priority
+              />
             </Link>
 
             {/* Desktop nav */}
