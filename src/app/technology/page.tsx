@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
+import Image from "next/image";
 import { Scan, MonitorSmartphone, Zap, Printer, ShieldCheck, Eye, ArrowRight, CheckCircle } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -15,6 +16,8 @@ const technologies = [
     icon: Scan,
     name: "CBCT 3D Scanner",
     tagline: "See the Full Picture",
+    photo: "/images/photos/digital-scan.jpg",
+    photoAlt: "3D digital scan displayed on screen at The Smile Suite",
     description:
       "Our Cone Beam Computed Tomography (CBCT) scanner creates detailed 3D images of your teeth, jaw, and surrounding structures in seconds. This advanced imaging helps Dr. Gonzales plan treatments with pinpoint accuracy — from implant placement to complex oral surgery.",
     benefits: [
@@ -28,6 +31,8 @@ const technologies = [
     icon: MonitorSmartphone,
     name: "iTero Digital Scanner",
     tagline: "No More Messy Impressions",
+    photo: "/images/photos/patient-consultation.jpg",
+    photoAlt: "Patient viewing digital scan results on monitor at The Smile Suite",
     description:
       "Say goodbye to uncomfortable impression trays. The iTero digital scanner captures a perfect 3D model of your teeth in minutes using a small, handheld wand. It's essential for Invisalign treatment, crown fittings, and smile design — and you can even see a preview of your new smile on screen.",
     benefits: [
@@ -41,6 +46,8 @@ const technologies = [
     icon: Zap,
     name: "Laser Dentistry",
     tagline: "Gentler, Faster Healing",
+    photo: "/images/photos/dr-closeup-procedure.jpg",
+    photoAlt: "Dr. Gonzales performing a precise dental procedure with loupes",
     description:
       "Dental lasers allow us to perform a wide range of procedures with minimal discomfort and faster recovery. From gum therapy to soft tissue treatments, laser dentistry means less swelling, less bleeding, and quicker healing compared to traditional methods.",
     benefits: [
@@ -54,6 +61,8 @@ const technologies = [
     icon: Printer,
     name: "In-Office 3D Printer",
     tagline: "Same-Day Solutions",
+    photo: "/images/photos/staff-lab-work.jpg",
+    photoAlt: "Dental staff working with retainer mold at The Smile Suite lab",
     description:
       "Our in-office 3D printer can create custom dental models, surgical guides, and temporary restorations right here — no waiting weeks for an outside lab. This means faster treatment, fewer appointments, and solutions designed specifically for you.",
     benefits: [
@@ -67,6 +76,8 @@ const technologies = [
     icon: ShieldCheck,
     name: "Digital X-Rays",
     tagline: "Safer, Clearer Imaging",
+    photo: "/images/photos/dr-working-2.jpg",
+    photoAlt: "Dr. Gonzales reviewing dental imaging with patient",
     description:
       "Our digital X-ray system uses up to 80% less radiation than traditional film X-rays while producing instant, crystal-clear images. Results appear on screen in seconds, so we can review them with you in real time and explain exactly what we see.",
     benefits: [
@@ -80,6 +91,8 @@ const technologies = [
     icon: Eye,
     name: "Intraoral Cameras",
     tagline: "See What We See",
+    photo: "/images/photos/dr-working-1.jpg",
+    photoAlt: "Dental team performing examination at The Smile Suite",
     description:
       "Our high-definition intraoral cameras capture detailed images of every corner of your mouth and display them on a screen right next to you. This helps you understand exactly what's happening with your dental health and empowers you to make informed decisions about your care.",
     benefits: [
@@ -116,9 +129,15 @@ export default function TechnologyPage() {
           <div className="max-w-7xl mx-auto">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center ${i % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
               <ScrollReveal direction={i % 2 === 0 ? "left" : "right"} className={i % 2 !== 0 ? "lg:order-2" : ""}>
-                <div className="aspect-[4/3] rounded-2xl bg-sage-lightest flex items-center justify-center relative overflow-hidden group">
-                  <div className="absolute inset-0 bg-sage/5 group-hover:bg-sage/10 transition-colors" />
-                  <tech.icon size={80} className="text-sage/20 group-hover:text-sage/30 transition-colors" />
+                <div className="aspect-[4/3] rounded-2xl relative overflow-hidden group">
+                  <Image
+                    src={tech.photo}
+                    alt={tech.photoAlt}
+                    fill
+                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                  />
+                  <div className="absolute inset-0 bg-charcoal/10 group-hover:bg-charcoal/5 transition-colors" />
                 </div>
               </ScrollReveal>
 

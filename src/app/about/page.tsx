@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
-import { GraduationCap, Heart, Award, MapPin, ArrowRight } from "lucide-react";
+import { GraduationCap, Award, MapPin, ArrowRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "About Dr. Mallory Gonzales | The Smile Suite | Midland, TX",
@@ -44,8 +44,8 @@ export default function AboutPage() {
             <ScrollReveal direction="left">
               <div className="aspect-[3/4] rounded-2xl relative overflow-hidden">
                 <Image
-                  src="/images/dr-gonzales.jpg"
-                  alt="Dr. Mallory Gonzales, DDS — The Smile Suite, Midland TX"
+                  src="/images/photos/dr-gonzales-portrait.jpg"
+                  alt="Dr. Mallory Gonzales, DDS with dental loupes — The Smile Suite, Midland TX"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
@@ -129,8 +129,14 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal direction="right">
-              <div className="aspect-video rounded-2xl bg-mint-light flex items-center justify-center">
-                <Heart size={48} className="text-sage/30" />
+              <div className="aspect-video rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/photos/dr-patient-lobby.jpg"
+                  alt="Dr. Gonzales chatting with a patient in the lobby at The Smile Suite"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
               </div>
             </ScrollReveal>
           </div>
@@ -172,12 +178,14 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
             {[
-              { src: "/images/team-1.jpg", name: "Dental Assistant", desc: "X-Ray & Imaging" },
-              { src: "/images/team-2.jpg", name: "Office Manager", desc: "Front Desk" },
-              { src: "/images/team-3.jpg", name: "Patient Coordinator", desc: "Front Desk" },
-              { src: "/images/team-4.jpg", name: "Dental Assistant", desc: "Invisalign Specialist" },
+              { src: "/images/photos/team-lobby.jpg", name: "Dental Team", desc: "Patient Care" },
+              { src: "/images/photos/team-member-portrait.jpg", name: "Dental Assistant", desc: "Clinical Support" },
+              { src: "/images/photos/reception-staff-1.jpg", name: "Front Desk", desc: "Patient Scheduling" },
+              { src: "/images/photos/reception-staff-2.jpg", name: "Patient Coordinator", desc: "Insurance & Billing" },
+              { src: "/images/photos/reception-staff-3.jpg", name: "Office Manager", desc: "Front Desk" },
+              { src: "/images/photos/team-hallway-pose.jpg", name: "Dental Assistant", desc: "X-Ray & Imaging" },
             ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
                 <div className="aspect-square rounded-2xl overflow-hidden relative">
@@ -186,7 +194,7 @@ export default function AboutPage() {
                     alt={`${member.name} at The Smile Suite`}
                     fill
                     className="object-cover object-top"
-                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    sizes="(max-width: 640px) 50vw, 33vw"
                   />
                 </div>
                 <p className="font-medium text-charcoal text-center mt-3 text-sm">{member.name}</p>

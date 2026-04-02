@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/components/ContactForm";
 import { MapPin, Phone, Clock, Navigation } from "lucide-react";
@@ -25,6 +26,34 @@ export default function ContactPage() {
             <p className="subtitle max-w-2xl mx-auto">
               Ready to start your smile journey? Have a question? Reach out — our friendly team is here to help.
             </p>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Office Photo Strip */}
+      <section className="bg-white pt-12 px-4">
+        <div className="max-w-7xl mx-auto">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="aspect-[16/9] rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/photos/office-lobby.jpg"
+                  alt="Welcoming lobby and hallway at The Smile Suite dental office"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
+              </div>
+              <div className="aspect-[16/9] rounded-2xl overflow-hidden relative">
+                <Image
+                  src="/images/photos/reception-staff-3.jpg"
+                  alt="Friendly front desk staff at The Smile Suite ready to help"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 640px) 100vw, 50vw"
+                />
+              </div>
+            </div>
           </ScrollReveal>
         </div>
       </section>
