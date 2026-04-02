@@ -178,27 +178,25 @@ export default function AboutPage() {
             </p>
           </ScrollReveal>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             {[
-              { src: "/images/photos/team-lobby.jpg", name: "Dental Team", desc: "Patient Care" },
-              { src: "/images/photos/team-member-portrait.jpg", name: "Dental Assistant", desc: "Clinical Support" },
-              { src: "/images/photos/reception-staff-1.jpg", name: "Front Desk", desc: "Patient Scheduling" },
-              { src: "/images/photos/reception-staff-2.jpg", name: "Patient Coordinator", desc: "Insurance & Billing" },
-              { src: "/images/photos/reception-staff-3.jpg", name: "Office Manager", desc: "Front Desk" },
-              { src: "/images/photos/team-hallway-pose.jpg", name: "Dental Assistant", desc: "X-Ray & Imaging" },
+              { src: "/images/photos/team-lobby.jpg", alt: "Smile Suite dental team members in the lobby" },
+              { src: "/images/photos/team-member-portrait.jpg", alt: "Smile Suite team member smiling" },
+              { src: "/images/photos/reception-staff-1.jpg", alt: "Smile Suite front desk staff" },
+              { src: "/images/photos/reception-staff-2.jpg", alt: "Smile Suite patient coordinator" },
+              { src: "/images/photos/reception-staff-3.jpg", alt: "Smile Suite office manager at front desk" },
+              { src: "/images/photos/team-hallway-pose.jpg", alt: "Smile Suite team member in hallway" },
             ].map((member, i) => (
               <ScrollReveal key={i} delay={i * 0.1}>
-                <div className="aspect-square rounded-2xl overflow-hidden relative">
+                <div className="aspect-[3/4] rounded-2xl overflow-hidden relative group">
                   <Image
                     src={member.src}
-                    alt={`${member.name} at The Smile Suite`}
+                    alt={member.alt}
                     fill
-                    className="object-cover object-top"
+                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
                     sizes="(max-width: 640px) 50vw, 33vw"
                   />
                 </div>
-                <p className="font-medium text-charcoal text-center mt-3 text-sm">{member.name}</p>
-                <p className="text-charcoal/50 text-center text-xs">{member.desc}</p>
               </ScrollReveal>
             ))}
           </div>
