@@ -99,8 +99,8 @@ export default function Home() {
             <ScrollReveal direction="left">
               <div className="aspect-[4/5] rounded-2xl overflow-hidden relative">
                 <Image
-                  src="/images/photos/dr-gonzales-portrait.jpg"
-                  alt="Dr. Mallory Gonzales, DDS with dental loupes — The Smile Suite, Midland TX"
+                  src="/images/photos/dr-mallory-headshot.jpg"
+                  alt="Dr. Mallory Gonzales, DDS — The Smile Suite, Midland TX"
                   fill
                   className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
