@@ -129,12 +129,12 @@ export default function AboutPage() {
               </div>
             </ScrollReveal>
             <ScrollReveal direction="right">
-              <div className="aspect-video rounded-2xl overflow-hidden relative">
+              <div className="aspect-[3/4] rounded-2xl overflow-hidden relative">
                 <Image
                   src="/images/photos/dr-patient-lobby.jpg"
                   alt="Dr. Gonzales chatting with a patient in the lobby at The Smile Suite"
                   fill
-                  className="object-cover object-center"
+                  className="object-cover object-top"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               </div>
