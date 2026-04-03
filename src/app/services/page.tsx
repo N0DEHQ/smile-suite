@@ -143,12 +143,12 @@ export default function ServicesPage() {
       </section>
 
       {/* Photo Banner */}
-      <section className="relative h-64 sm:h-80 overflow-hidden">
+      <section className="relative h-80 sm:h-96 lg:h-[28rem] overflow-hidden">
         <Image
           src="/images/photos/dr-closeup-procedure.jpg"
           alt="Dr. Gonzales performing a dental procedure with precision loupes at The Smile Suite"
           fill
-          className="object-cover object-center"
+          className="object-cover object-top"
           sizes="100vw"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
