@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import Image from "next/image";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import {
   SmilePlus,
@@ -140,18 +139,6 @@ export default function ServicesPage() {
             </div>
           </ScrollReveal>
         </div>
-      </section>
-
-      {/* Photo Banner */}
-      <section className="relative h-80 sm:h-96 lg:h-[28rem] overflow-hidden">
-        <Image
-          src="/images/photos/dr-closeup-procedure.jpg"
-          alt="Dr. Gonzales performing a dental procedure with precision loupes at The Smile Suite"
-          fill
-          className="object-cover object-top"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-white" />
       </section>
 
       {/* Service Categories */}
