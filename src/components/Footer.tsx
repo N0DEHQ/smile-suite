@@ -100,7 +100,7 @@ export default function Footer() {
                 "Invisalign",
                 "Cosmetic Dentistry",
                 "Teeth Whitening",
-                "Botox",
+                "Teeth Whitening",
                 "Emergency Care",
                 "Cleanings & Exams",
                 "Periodontal Therapy",

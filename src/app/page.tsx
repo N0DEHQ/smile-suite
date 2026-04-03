@@ -39,9 +39,9 @@ const services = [
   },
   {
     icon: Syringe,
-    title: "Botox",
+    title: "Root Canals & Restorative",
     description:
-      "Smooth wrinkles and relieve jaw tension with expert Botox treatments in a comfortable dental setting.",
+      "Modern root canal therapy and restorative care to save your natural teeth — with minimal discomfort and fast recovery.",
   },
   {
     icon: AlertCircle,

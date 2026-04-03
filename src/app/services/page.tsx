@@ -3,7 +3,6 @@ import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/Scroll
 import {
   SmilePlus,
   Sparkles,
-  Syringe,
   AlertCircle,
   Sun,
   Stethoscope,
@@ -15,9 +14,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Dental Services | Invisalign, Cosmetic Dentistry, Botox | The Smile Suite Midland TX",
+  title: "Dental Services | Invisalign, Cosmetic Dentistry, Whitening | The Smile Suite Midland TX",
   description:
-    "Comprehensive dental services in Midland, TX: Invisalign, cosmetic dentistry, Botox, teeth whitening, emergency care, periodontal therapy, and more. Book today!",
+    "Comprehensive dental services in Midland, TX: Invisalign, cosmetic dentistry, teeth whitening, emergency care, periodontal therapy, and more. Book today!",
 };
 
 const BOOKING_URL = "https://www.smilemidland.com/contact-us/";
@@ -34,13 +33,7 @@ const serviceCategories = [
           "Achieve a dramatically brighter smile with professional-grade whitening. Our in-office treatments deliver results far beyond anything you can get over the counter — safely and comfortably in just one visit.",
         benefits: ["Immediate results", "Safe for enamel", "Long-lasting brightness", "Custom treatment plans"],
       },
-      {
-        icon: Syringe,
-        name: "Botox",
-        description:
-          "Smooth facial wrinkles and relieve jaw tension with precision Botox treatments administered by Dr. Gonzales. As a dental professional, she has expert knowledge of facial anatomy for natural, beautiful results.",
-        benefits: ["Wrinkle reduction", "TMJ/jaw tension relief", "Natural-looking results", "Quick & comfortable"],
-      },
+
       {
         icon: Sparkles,
         name: "Smile Design & Contouring",

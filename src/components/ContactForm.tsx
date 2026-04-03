@@ -103,7 +103,7 @@ export default function ContactForm() {
           <option value="invisalign">Invisalign</option>
           <option value="whitening">Teeth Whitening</option>
           <option value="cosmetic">Cosmetic Dentistry</option>
-          <option value="botox">Botox</option>
+          <option value="whitening">Teeth Whitening</option>
           <option value="emergency">Emergency Care</option>
           <option value="periodontal">Periodontal Therapy</option>
           <option value="other">Other / Not Sure</option>

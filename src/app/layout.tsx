@@ -19,7 +19,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "The Smile Suite | Family & Cosmetic Dentist in Midland, TX",
   description:
-    "Gentle, modern dentistry for every stage of life. Dr. Mallory Gonzales offers Invisalign, cosmetic dentistry, Botox, emergency care & more in Midland, TX. Se Habla Español.",
+    "Gentle, modern dentistry for every stage of life. Dr. Mallory Gonzales offers Invisalign, cosmetic dentistry, teeth whitening, emergency care & more in Midland, TX. Se Habla Español.",
   keywords: [
     "dentist midland tx",
     "cosmetic dentist midland",
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     "invisalign midland tx",
     "emergency dentist midland",
     "teeth whitening midland tx",
-    "botox dentist midland",
+    "teeth whitening midland",
     "the smile suite",
     "dr mallory gonzales",
     "dentist odessa tx",
@@ -93,7 +93,7 @@ const jsonLd = {
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cosmetic Dentistry" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Emergency Dentistry" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teeth Whitening" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Botox" } },
+      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teeth Whitening" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Periodontal Therapy" } },
     ],
   },
