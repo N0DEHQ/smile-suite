@@ -93,7 +93,6 @@ const jsonLd = {
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Cosmetic Dentistry" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Emergency Dentistry" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teeth Whitening" } },
-      { "@type": "Offer", itemOffered: { "@type": "Service", name: "Teeth Whitening" } },
       { "@type": "Offer", itemOffered: { "@type": "Service", name: "Periodontal Therapy" } },
     ],
   },

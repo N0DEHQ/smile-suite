@@ -101,7 +101,6 @@ export default function ContactForm() {
           <option value="">Select a service...</option>
           <option value="cleaning">Cleaning & Exam</option>
           <option value="invisalign">Invisalign</option>
-          <option value="whitening">Teeth Whitening</option>
           <option value="cosmetic">Cosmetic Dentistry</option>
           <option value="whitening">Teeth Whitening</option>
           <option value="emergency">Emergency Care</option>
