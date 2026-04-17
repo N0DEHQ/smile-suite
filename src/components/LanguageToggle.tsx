@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useCallback, useSyncExternalStore } from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import { Languages } from "lucide-react";
+import {
+  COOKIE_CONSENT_UPDATED_EVENT,
+  createCookieConsent,
+  readStoredCookieConsent,
+  writeStoredCookieConsent,
+} from "@/lib/cookie-consent";
 
 declare global {
   interface Window {
@@ -20,14 +26,11 @@ declare global {
   }
 }
 
-// ── Shared global state (all LanguageToggle instances sync) ──
-
 function initGlobalState() {
   if (typeof window === "undefined") return;
   if (!window.__langListeners) {
     window.__langListeners = new Set();
     window.__langReady = false;
-    // Check cookie on init
     window.__langSpanish = document.cookie.includes("googtrans=/en/es");
   }
 }
@@ -35,7 +38,9 @@ function initGlobalState() {
 function subscribe(cb: () => void) {
   initGlobalState();
   window.__langListeners.add(cb);
-  return () => { window.__langListeners.delete(cb); };
+  return () => {
+    window.__langListeners.delete(cb);
+  };
 }
 
 function getIsSpanish() {
@@ -60,76 +65,149 @@ function setCookie(name: string, value: string, days: number) {
   document.cookie = `${name}=${value};expires=${d.toUTCString()};path=/`;
 }
 
-// ── Google Translate loader (runs once) ──
+let loadPromise: Promise<void> | null = null;
 
-let scriptLoaded = false;
+function waitForElement(selector: string, timeoutMs = 3000): Promise<Element | null> {
+  const startedAt = Date.now();
 
-function ensureGoogleTranslate() {
-  if (scriptLoaded || typeof window === "undefined") return;
-  if (document.getElementById("google-translate-script")) {
-    scriptLoaded = true;
-    return;
-  }
+  return new Promise((resolve) => {
+    const check = () => {
+      const element = document.querySelector(selector);
+      if (element) {
+        resolve(element);
+        return;
+      }
 
-  window.googleTranslateElementInit = () => {
-    new window.google.translate.TranslateElement(
-      { pageLanguage: "en", includedLanguages: "en,es", autoDisplay: false },
-      "google_translate_element"
-    );
-    window.__langReady = true;
-    notifyAll();
-  };
+      if (Date.now() - startedAt >= timeoutMs) {
+        resolve(null);
+        return;
+      }
 
-  const script = document.createElement("script");
-  script.id = "google-translate-script";
-  script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-  script.async = true;
-  document.body.appendChild(script);
-  scriptLoaded = true;
+      window.setTimeout(check, 50);
+    };
+
+    check();
+  });
 }
 
-// ── Component ──
+function ensureGoogleTranslate(): Promise<void> {
+  if (typeof window === "undefined") {
+    return Promise.resolve();
+  }
+
+  initGlobalState();
+
+  if (window.__langReady) {
+    return Promise.resolve();
+  }
+
+  if (loadPromise) {
+    return loadPromise;
+  }
+
+  loadPromise = new Promise((resolve) => {
+    const existingScript = document.getElementById("google-translate-script");
+
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        { pageLanguage: "en", includedLanguages: "en,es", autoDisplay: false },
+        "google_translate_element"
+      );
+      window.__langReady = true;
+      notifyAll();
+      resolve();
+    };
+
+    if (existingScript) {
+      const poll = () => {
+        if (window.__langReady) {
+          resolve();
+          return;
+        }
+        window.setTimeout(poll, 50);
+      };
+      poll();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.id = "google-translate-script";
+    script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
+  });
+
+  return loadPromise;
+}
 
 export default function LanguageToggle({ className = "" }: { className?: string }) {
   const isSpanish = useSyncExternalStore(subscribe, getIsSpanish, () => false);
   const ready = useSyncExternalStore(subscribe, getIsReady, () => false);
+  const [functionalEnabled, setFunctionalEnabled] = useState(false);
 
   useEffect(() => {
-    ensureGoogleTranslate();
+    const syncConsent = () => {
+      const consent = readStoredCookieConsent();
+      const enabled = Boolean(consent?.functional || document.cookie.includes("googtrans=/en/es"));
+      setFunctionalEnabled(enabled);
+
+      if (enabled) {
+        void ensureGoogleTranslate();
+      }
+    };
+
+    syncConsent();
+    window.addEventListener(COOKIE_CONSENT_UPDATED_EVENT, syncConsent);
+
+    return () => {
+      window.removeEventListener(COOKIE_CONSENT_UPDATED_EVENT, syncConsent);
+    };
   }, []);
 
-  const handleClick = useCallback(() => {
-    if (!ready) return;
+  const handleClick = useCallback(async () => {
+    if (!functionalEnabled) {
+      const currentConsent = readStoredCookieConsent();
+
+      writeStoredCookieConsent(
+        createCookieConsent({
+          functional: true,
+          analytics: currentConsent?.analytics ?? false,
+        })
+      );
+      setFunctionalEnabled(true);
+    }
+
+    await ensureGoogleTranslate();
 
     if (isSpanish) {
-      // Switch to English
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       setCookie("googtrans", "/en/en", 1);
       window.__langSpanish = false;
       notifyAll();
       window.location.reload();
-    } else {
-      // Switch to Spanish
-      setCookie("googtrans", "/en/es", 1);
-      document.cookie = "googtrans=/en/es; path=/;";
-
-      const select = document.querySelector(".goog-te-combo") as HTMLSelectElement | null;
-      if (select) {
-        select.value = "es";
-        select.dispatchEvent(new Event("change"));
-      }
-
-      window.__langSpanish = true;
-      notifyAll();
-
-      // If select didn't work, reload
-      if (!select) window.location.reload();
+      return;
     }
-  }, [isSpanish, ready]);
+
+    setCookie("googtrans", "/en/es", 1);
+    document.cookie = "googtrans=/en/es; path=/;";
+
+    const select = (await waitForElement(".goog-te-combo")) as HTMLSelectElement | null;
+
+    if (select) {
+      select.value = "es";
+      select.dispatchEvent(new Event("change"));
+    }
+
+    window.__langSpanish = true;
+    notifyAll();
+
+    if (!select) {
+      window.location.reload();
+    }
+  }, [functionalEnabled, isSpanish]);
 
   return (
     <>
-      {/* Single hidden element shared by all instances */}
       <div id="google_translate_element" className="!hidden" />
 
       <style jsx global>{`
@@ -178,10 +256,12 @@ export default function LanguageToggle({ className = "" }: { className?: string 
       `}</style>
 
       <button
-        onClick={handleClick}
-        disabled={!ready}
+        onClick={() => {
+          void handleClick();
+        }}
+        disabled={functionalEnabled && !ready}
         className={`inline-flex items-center gap-1.5 font-semibold hover:text-gold transition-all duration-200 cursor-pointer select-none active:scale-95 ${
-          !ready ? "opacity-50 cursor-wait" : ""
+          functionalEnabled && !ready ? "opacity-50 cursor-wait" : ""
         } ${className}`}
         aria-label={isSpanish ? "Switch to English" : "Traducir al Español"}
       >

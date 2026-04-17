@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "@/components/ScrollReveal";
 import {
   SmilePlus,
@@ -109,29 +110,48 @@ export default function ServicesPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-sage-gradient py-20 sm:py-28 px-4 overflow-hidden">
-        <div className="absolute bottom-0 right-0 w-72 h-72 rounded-full bg-sage/10 -mb-20 -mr-20" />
-        <div className="max-w-7xl mx-auto text-center relative">
-          <ScrollReveal>
-            <span className="text-sage text-sm font-semibold uppercase tracking-wider">Our Services</span>
-            <h1 className="heading-1 text-charcoal mt-2 mb-6">
-              Comprehensive Care for <span className="text-sage">Every Smile</span>
-            </h1>
-            <p className="subtitle max-w-2xl mx-auto mb-8">
-              From preventive checkups to stunning cosmetic transformations, The Smile Suite offers the full spectrum of modern dental care — all under one roof.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2 group">
-                Book an Appointment
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </a>
-              <a href="tel:4326920239" className="inline-flex items-center gap-2 text-sage-dark font-medium hover:text-sage transition-colors">
-                <Phone size={16} />
-                (432) 692-0239
-              </a>
+      <section className="relative min-h-[68vh] sm:min-h-[74vh] flex items-center overflow-hidden px-4">
+        <Image
+          src="/images/photos/services-hero-implant.jpg"
+          alt="Dental implant model representing restorative and cosmetic dental services at The Smile Suite"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_68%] md:object-center"
+          quality={90}
+        />
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(34,39,42,0.22),rgba(34,39,42,0.16)_26%,rgba(248,244,238,0.70)_76%,rgba(255,255,255,0.92)_100%)]" />
+        <div className="absolute top-10 left-10 h-44 w-44 rounded-full bg-sage/10 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto w-full py-20 sm:py-28 text-center">
+          <ScrollReveal className="mx-auto max-w-4xl">
+            <span className="inline-block rounded-full border border-charcoal/10 bg-charcoal px-4 py-1.5 text-sm font-medium text-white shadow-lg shadow-charcoal/15 mb-6">
+              Our Services
+            </span>
+            <div className="rounded-[2rem] border border-[#e9e1d8] bg-cream p-8 sm:p-10 lg:p-12 shadow-[0_24px_80px_rgba(45,52,54,0.16)]">
+              <h1 className="heading-1 text-charcoal mt-2 mb-6">
+                Comprehensive Care for <span className="text-sage">Every Smile</span>
+              </h1>
+              <p className="subtitle max-w-2xl mx-auto mb-8">
+                From preventive checkups to stunning cosmetic transformations, The Smile Suite offers the full spectrum of modern dental care, all under one roof.
+              </p>
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-primary inline-flex items-center gap-2 group">
+                  Book an Appointment
+                  <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
+                </a>
+                <a href="tel:4326920239" className="inline-flex items-center gap-2 text-sage-dark font-medium hover:text-sage transition-colors">
+                  <Phone size={16} />
+                  (432) 692-0239
+                </a>
+              </div>
             </div>
           </ScrollReveal>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Service Categories */}

@@ -16,8 +16,9 @@ const technologies = [
     icon: Scan,
     name: "CBCT 3D Scanner",
     tagline: "See the Full Picture",
-    photo: "/images/photos/digital-scan.jpg",
-    photoAlt: "3D digital scan displayed on screen at The Smile Suite",
+    photo: "/images/photos/cbct-scanner.jpg",
+    photoAlt: "CBCT 3D scanner inside The Smile Suite imaging room",
+    photoClassName: "object-cover object-[center_38%]",
     description:
       "Our Cone Beam Computed Tomography (CBCT) scanner creates detailed 3D images of your teeth, jaw, and surrounding structures in seconds. This advanced imaging helps Dr. Gonzales plan treatments with pinpoint accuracy — from implant placement to complex oral surgery.",
     benefits: [
@@ -31,8 +32,9 @@ const technologies = [
     icon: MonitorSmartphone,
     name: "iTero Digital Scanner",
     tagline: "No More Messy Impressions",
-    photo: "/images/photos/patient-consultation.jpg",
-    photoAlt: "Patient viewing digital scan results on monitor at The Smile Suite",
+    photo: "/images/photos/operatory-tech.jpg",
+    photoAlt: "Modern treatment room with digital scanner and monitor at The Smile Suite",
+    photoClassName: "object-cover object-[center_35%]",
     description:
       "Say goodbye to uncomfortable impression trays. The iTero digital scanner captures a perfect 3D model of your teeth in minutes using a small, handheld wand. It's essential for Invisalign treatment, crown fittings, and smile design — and you can even see a preview of your new smile on screen.",
     benefits: [
@@ -46,8 +48,9 @@ const technologies = [
     icon: Zap,
     name: "Laser Dentistry",
     tagline: "Gentler, Faster Healing",
-    photo: "/images/photos/dr-closeup-procedure.jpg",
-    photoAlt: "Dr. Gonzales performing a precise dental procedure with loupes",
+    photo: "/images/photos/chairside-tools.jpg",
+    photoAlt: "Chairside dental instruments prepared for precise treatment at The Smile Suite",
+    photoClassName: "object-cover object-center",
     description:
       "Dental lasers allow us to perform a wide range of procedures with minimal discomfort and faster recovery. From gum therapy to soft tissue treatments, laser dentistry means less swelling, less bleeding, and quicker healing compared to traditional methods.",
     benefits: [
@@ -63,6 +66,7 @@ const technologies = [
     tagline: "Same-Day Solutions",
     photo: "/images/photos/staff-lab-work.jpg",
     photoAlt: "Dental staff working with retainer mold at The Smile Suite lab",
+    photoClassName: "object-cover object-[center_34%]",
     description:
       "Our in-office 3D printer can create custom dental models, surgical guides, and temporary restorations right here — no waiting weeks for an outside lab. This means faster treatment, fewer appointments, and solutions designed specifically for you.",
     benefits: [
@@ -76,8 +80,9 @@ const technologies = [
     icon: ShieldCheck,
     name: "Digital X-Rays",
     tagline: "Safer, Clearer Imaging",
-    photo: "/images/photos/dr-working-2.jpg",
-    photoAlt: "Dr. Gonzales reviewing dental imaging with patient",
+    photo: "/images/photos/digital-xray-monitor.jpg",
+    photoAlt: "Panoramic dental X-ray displayed on a monitor at The Smile Suite",
+    photoClassName: "object-cover object-center",
     description:
       "Our digital X-ray system uses up to 80% less radiation than traditional film X-rays while producing instant, crystal-clear images. Results appear on screen in seconds, so we can review them with you in real time and explain exactly what we see.",
     benefits: [
@@ -91,8 +96,9 @@ const technologies = [
     icon: Eye,
     name: "Intraoral Cameras",
     tagline: "See What We See",
-    photo: "/images/photos/dr-working-1.jpg",
-    photoAlt: "Dental team performing examination at The Smile Suite",
+    photo: "/images/photos/patient-chair.jpg",
+    photoAlt: "Patient seated comfortably in a treatment room during imaging at The Smile Suite",
+    photoClassName: "object-cover object-[58%_32%]",
     description:
       "Our high-definition intraoral cameras capture detailed images of every corner of your mouth and display them on a screen right next to you. This helps you understand exactly what's happening with your dental health and empowers you to make informed decisions about your care.",
     benefits: [
@@ -108,19 +114,38 @@ export default function TechnologyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-sage-gradient py-20 sm:py-28 px-4 overflow-hidden">
-        <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-sage/10" />
-        <div className="max-w-7xl mx-auto text-center relative">
-          <ScrollReveal>
-            <span className="text-sage text-sm font-semibold uppercase tracking-wider">Our Technology</span>
-            <h1 className="heading-1 text-charcoal mt-2 mb-6">
-              Technology That Puts <span className="text-sage">You First</span>
-            </h1>
-            <p className="subtitle max-w-2xl mx-auto">
-              We invest in the latest dental technology so every visit is faster, more comfortable, and more precise. Here&apos;s what sets The Smile Suite apart.
-            </p>
+      <section className="relative min-h-[68vh] sm:min-h-[74vh] flex items-center overflow-hidden px-4">
+        <Image
+          src="/images/photos/technology-hero-tools.jpg"
+          alt="Modern dental handpieces and technology equipment at The Smile Suite"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[center_55%]"
+          quality={90}
+        />
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(34,39,42,0.18),rgba(34,39,42,0.12)_28%,rgba(248,244,238,0.70)_76%,rgba(255,255,255,0.92)_100%)]" />
+        <div className="absolute top-10 left-10 h-44 w-44 rounded-full bg-sage/10 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full bg-gold/10 blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto w-full py-20 sm:py-28 text-center">
+          <ScrollReveal className="mx-auto max-w-4xl">
+            <span className="inline-block rounded-full border border-charcoal/10 bg-charcoal px-4 py-1.5 text-sm font-medium text-white shadow-lg shadow-charcoal/15 mb-6">
+              Our Technology
+            </span>
+            <div className="rounded-[2rem] border border-[#e9e1d8] bg-cream p-8 sm:p-10 lg:p-12 shadow-[0_24px_80px_rgba(45,52,54,0.16)]">
+              <h1 className="heading-1 text-charcoal mt-2 mb-6">
+                Technology That Puts <span className="text-sage">You First</span>
+              </h1>
+              <p className="subtitle max-w-2xl mx-auto">
+                We invest in the latest dental technology so every visit is faster, more comfortable, and more precise. Here&apos;s what sets The Smile Suite apart.
+              </p>
+            </div>
           </ScrollReveal>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Tech sections */}
@@ -129,12 +154,12 @@ export default function TechnologyPage() {
           <div className="max-w-7xl mx-auto">
             <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center ${i % 2 !== 0 ? "lg:flex-row-reverse" : ""}`}>
               <ScrollReveal direction={i % 2 === 0 ? "left" : "right"} className={i % 2 !== 0 ? "lg:order-2" : ""}>
-                <div className="aspect-[4/3] rounded-2xl relative overflow-hidden group">
+                <div className="aspect-[4/5] sm:aspect-[5/4] rounded-2xl relative overflow-hidden group">
                   <Image
                     src={tech.photo}
                     alt={tech.photoAlt}
                     fill
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className={`${tech.photoClassName} group-hover:scale-105 transition-transform duration-500`}
                     sizes="(max-width: 1024px) 100vw, 50vw"
                   />
                   <div className="absolute inset-0 bg-charcoal/10 group-hover:bg-charcoal/5 transition-colors" />

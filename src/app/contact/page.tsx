@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/components/ContactForm";
+import ConsentAwareMap from "@/components/ConsentAwareMap";
 import { MapPin, Phone, Clock, Navigation } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -16,43 +17,86 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-sage-gradient py-20 sm:py-28 px-4 overflow-hidden">
-        <div className="max-w-7xl mx-auto text-center relative">
-          <ScrollReveal>
-            <span className="text-sage text-sm font-semibold uppercase tracking-wider">Get in Touch</span>
-            <h1 className="heading-1 text-charcoal mt-2 mb-6">
-              We&apos;d Love to <span className="text-sage">Hear From You</span>
-            </h1>
-            <p className="subtitle max-w-2xl mx-auto">
-              Ready to start your smile journey? Have a question? Reach out — our friendly team is here to help.
-            </p>
+      <section className="relative min-h-[68vh] sm:min-h-[74vh] flex items-center overflow-hidden px-4">
+        <Image
+          src="/images/contact-hero-video-poster.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+          quality={85}
+        />
+
+        <video
+          className="absolute inset-0 h-full w-full object-cover scale-[1.03] brightness-[0.82] saturate-[0.92] motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster="/images/contact-hero-video-poster.jpg"
+          aria-hidden="true"
+        >
+          <source src="/videos/contact-hero-loop.mp4" type="video/mp4" />
+        </video>
+
+        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(25,33,32,0.20),rgba(25,33,32,0.18)_22%,rgba(245,241,235,0.62)_74%,rgba(255,255,255,0.92)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(125,155,120,0.18),transparent_34%),radial-gradient(circle_at_top_right,rgba(201,169,110,0.16),transparent_30%)]" />
+        <div className="absolute top-10 left-10 h-44 w-44 rounded-full bg-sage/14 blur-3xl" />
+        <div className="absolute bottom-10 right-10 h-56 w-56 rounded-full bg-gold/12 blur-3xl" />
+
+        <div className="relative max-w-7xl mx-auto w-full py-20 sm:py-28 text-center">
+          <ScrollReveal className="mx-auto max-w-4xl">
+            <span className="inline-block rounded-full border border-charcoal/10 bg-charcoal px-4 py-1.5 text-sm font-medium text-white shadow-lg shadow-charcoal/15 mb-6">
+              Get in Touch
+            </span>
+            <div className="rounded-[2rem] border border-[#e9e1d8] bg-cream p-8 sm:p-10 lg:p-12 shadow-[0_24px_80px_rgba(45,52,54,0.16)]">
+              <h1 className="heading-1 text-charcoal mb-6">
+                We&apos;d Love to <span className="text-sage-dark">Hear From You</span>
+              </h1>
+              <p className="max-w-2xl mx-auto text-lg sm:text-xl text-charcoal/80 leading-relaxed">
+                Ready to start your smile journey? Have a question? Reach out, our friendly team is here to help.
+              </p>
+            </div>
           </ScrollReveal>
         </div>
+
+        <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white to-transparent" />
       </section>
 
       {/* Office Photo Strip */}
       <section className="bg-white pt-12 px-4">
         <div className="max-w-7xl mx-auto">
           <ScrollReveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="aspect-[16/9] rounded-2xl overflow-hidden relative">
-                <Image
-                  src="/images/photos/office-lobby.jpg"
-                  alt="Welcoming lobby and hallway at The Smile Suite dental office"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-              </div>
-              <div className="aspect-[16/9] rounded-2xl overflow-hidden relative">
-                <Image
-                  src="/images/photos/reception-staff-3.jpg"
-                  alt="Friendly front desk staff at The Smile Suite ready to help"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 640px) 100vw, 50vw"
-                />
-              </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              {[
+                {
+                  src: "/images/photos/contact-tooth-model.jpg",
+                  alt: "Decorative tooth model displayed at The Smile Suite",
+                  className: "object-cover object-center",
+                },
+                {
+                  src: "/images/photos/contact-xray-film.jpg",
+                  alt: "Panoramic dental X-ray film held up for review at The Smile Suite",
+                  className: "object-cover object-center",
+                },
+                {
+                  src: "/images/photos/sterile-tray.jpg",
+                  alt: "Prepared treatment tray inside a clean Smile Suite operatory",
+                  className: "object-cover object-[center_42%]",
+                },
+              ].map((photo) => (
+                <div key={photo.src} className="aspect-[4/5] sm:aspect-[16/10] rounded-2xl overflow-hidden relative">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className={photo.className}
+                    sizes="(max-width: 640px) 100vw, 33vw"
+                  />
+                </div>
+              ))}
             </div>
           </ScrollReveal>
         </div>
@@ -189,19 +233,11 @@ export default function ContactPage() {
       <section className="bg-sage-lightest">
         <div className="max-w-7xl mx-auto px-4 py-12">
           <ScrollReveal>
-            <div className="rounded-2xl overflow-hidden border border-sage-lighter/50 bg-white">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3379.5!2d-102.0779!3d31.9973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU5JzUwLjMiTiAxMDLCsDA0JzQwLjQiVw!5e0!3m2!1sen!2sus!4v1"
-                width="100%"
-                height="400"
-                style={{ border: 0 }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-                title="The Smile Suite Location"
-                className="w-full"
-              />
-            </div>
+            <ConsentAwareMap
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3379.5!2d-102.0779!3d31.9973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDU5JzUwLjMiTiAxMDLCsDA0JzQwLjQiVw!5e0!3m2!1sen!2sus!4v1"
+              title="The Smile Suite Location"
+              directionsHref="https://maps.app.goo.gl/kTuQWY7PNFsQH8fk8"
+            />
             <p className="text-center text-charcoal/50 text-sm mt-4">
               Located in the Claydesta Center — 6 Desta Drive, Suite 2700, Midland, TX 79705
             </p>

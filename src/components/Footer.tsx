@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CookieSettingsButton from "@/components/CookieSettingsButton";
 import { Phone, MapPin, Clock, Instagram, Facebook } from "lucide-react";
 
 const BOOKING_URL = "https://www.smilemidland.com/contact-us/";
@@ -72,6 +73,7 @@ export default function Footer() {
                 { href: "/services", label: "Our Services" },
                 { href: "/technology", label: "Our Technology" },
                 { href: "/contact", label: "Contact Us" },
+                { href: "/privacy-policy", label: "Privacy & Website Policy" },
               ].map((link) => (
                 <Link
                   key={link.href}
@@ -100,7 +102,7 @@ export default function Footer() {
                 "Invisalign",
                 "Cosmetic Dentistry",
                 "Teeth Whitening",
-                "Teeth Whitening",
+                "Root Canals & Restorative",
                 "Emergency Care",
                 "Cleanings & Exams",
                 "Periodontal Therapy",
@@ -162,6 +164,14 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-white/10 py-6 px-4 text-center text-xs text-white/40">
         <p>© {new Date().getFullYear()} The Smile Suite. All rights reserved.</p>
+        <div className="mt-1 flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+          <Link href="/privacy-policy" className="text-gold/70 hover:text-gold transition-colors">
+            Privacy, Cookies & Website Use
+          </Link>
+          <CookieSettingsButton className="text-gold/70 hover:text-gold transition-colors">
+            Cookie Settings
+          </CookieSettingsButton>
+        </div>
         <p className="mt-1">
           Website by{" "}
           <a
